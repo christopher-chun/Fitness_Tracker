@@ -1,7 +1,7 @@
 ## Prompt Log for This Assignment
 
 ### Prompt 1:
->"Replace me with a propt"
+>"What is the correct timer logic using useEffect and intervals"
 
 ---
 
