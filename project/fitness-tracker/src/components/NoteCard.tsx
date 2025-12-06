@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 type NoteCardProps = {
   note: any;
@@ -8,11 +8,11 @@ type NoteCardProps = {
 
 export default function NoteCard({ note, onPress, onLongPress }: NoteCardProps) {
   const formatDate = (date?: Date) => {
-    if (!date) return "";
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
+    if (!date) return '';
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
     });
   };
 
@@ -38,31 +38,31 @@ export default function NoteCard({ note, onPress, onLongPress }: NoteCardProps) 
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 8,
   },
   name: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
     flex: 1,
   },
   date: {
     fontSize: 12,
-    color: "#888",
+    color: '#888',
     marginLeft: 8,
   },
   content: {
     fontSize: 14,
-    color: "#666",
+    color: '#666',
     lineHeight: 20,
   },
 });

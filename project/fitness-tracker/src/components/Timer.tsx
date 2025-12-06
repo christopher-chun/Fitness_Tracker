@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 type TimerProps = {
   initialSeconds?: number;
@@ -62,7 +62,7 @@ export default function Timer({ initialSeconds = 60, onComplete }: TimerProps) {
     const mins = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
     // format as MM:SS
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -98,19 +98,19 @@ export default function Timer({ initialSeconds = 60, onComplete }: TimerProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 16,
     padding: 24,
-    alignItems: "center",
+    alignItems: 'center',
   },
   timeText: {
     fontSize: 64,
-    fontWeight: "bold",
-    color: "#000000ff",
+    fontWeight: 'bold',
+    color: '#000000ff',
     marginBottom: 24,
   },
   buttonContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 12,
   },
   button: {
@@ -118,20 +118,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 8,
     minWidth: 100,
-    alignItems: "center",
+    alignItems: 'center',
   },
   startButton: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
   },
   pauseButton: {
-    backgroundColor: "#FF9800",
+    backgroundColor: '#FF9800',
   },
   resetButton: {
-    backgroundColor: "#757575",
+    backgroundColor: '#757575',
   },
   buttonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

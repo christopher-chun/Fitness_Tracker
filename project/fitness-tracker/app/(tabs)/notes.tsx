@@ -1,29 +1,26 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { router } from "expo-router";
-import { useNotes } from "../../src/contexts/NoteContext";
-import Header from "../../src/components/Header";
-import NoteCard from "../../src/components/NoteCard";
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { router } from 'expo-router';
+import { useNotes } from '../../src/contexts/NoteContext';
+import Header from '../../src/components/Header';
+import NoteCard from '../../src/components/NoteCard';
 
 export default function NotesScreen() {
   const { notes } = useNotes();
 
   const handleAddNote = () => {
-    router.push("/(modals)/create-note");
+    router.push('/(modals)/CreateNote');
   };
 
   const handleNotePress = (note: any) => {
-    console.log("Note pressed:", note);
-    // TODO: navigate to edit not modal
-  };
-
-  const handleNoteLongPress = (note: any) => {
-    console.log("Note long pressed:", note);
-    // TODO: delete note
+    router.push({
+      pathname: '/(modals)/EditNote',
+      params: { noteId: note.id },
+    });
   };
 
   return (
     <View style={styles.container}>
-      <Header title="Progress & Notes" onAddPress={handleAddNote} />
+      <Header title='Progress & Notes' onAddPress={handleAddNote} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -43,7 +40,6 @@ export default function NotesScreen() {
                 key={note.id}
                 note={note}
                 onPress={() => handleNotePress(note)}
-                onLongPress={() => handleNoteLongPress(note)}
               />
             ))}
           </>
@@ -56,7 +52,7 @@ export default function NotesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: '#f5f5f5',
   },
   scrollView: {
     flex: 1,
@@ -66,26 +62,26 @@ const styles = StyleSheet.create({
   },
   emptyState: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 100,
   },
   emptyText: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#999",
+    fontWeight: '600',
+    color: '#999',
     marginBottom: 8,
   },
   emptySubtext: {
     fontSize: 14,
-    color: "#666",
-    textAlign: "center",
+    color: '#666',
+    textAlign: 'center',
     paddingHorizontal: 40,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 16,
   },
 });

@@ -6,7 +6,7 @@
 ---
 
 ### Prompt 2:
->"Replace me with a propt"
+>"How should I create a confirmation alert before destroying an object"
 
 ---
 

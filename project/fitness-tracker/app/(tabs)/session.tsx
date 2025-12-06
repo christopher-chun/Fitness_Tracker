@@ -1,26 +1,19 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import { useWorkout } from "../../src/contexts/WorkoutContext";
-import Header from "../../src/components/Header";
-import ExerciseItem from "../../src/components/ExerciseItem";
-import Timer from "../../src/components/Timer";
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { useWorkout } from '../../src/contexts/WorkoutContext';
+import Header from '../../src/components/Header';
+import ExerciseItem from '../../src/components/ExerciseItem';
+import Timer from '../../src/components/Timer';
 
 export default function SessionScreen() {
   const { currentWorkout, setCurrentWorkout } = useWorkout();
 
   const handleEndSession = () => {
     setCurrentWorkout(null);
-    Alert.alert("Workout Finished!");
+    Alert.alert('Workout Finished!');
   };
 
   const handleTimerComplete = () => {
-    Alert.alert("Rest Completed");
+    Alert.alert('Rest Completed');
   };
 
   if (!currentWorkout) {
@@ -39,7 +32,7 @@ export default function SessionScreen() {
 
   return (
     <View style={styles.container}>
-      <Header title="Current Session" />
+      <Header title='Current Session' />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -76,7 +69,7 @@ export default function SessionScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: '#f5f5f5',
   },
   scrollView: {
     flex: 1,
@@ -86,58 +79,58 @@ const styles = StyleSheet.create({
   },
   emptyState: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 100,
   },
   emptyText: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#999",
+    fontWeight: '600',
+    color: '#999',
     marginBottom: 8,
   },
   emptySubtext: {
     fontSize: 14,
-    color: "#666",
-    textAlign: "center",
+    color: '#666',
+    textAlign: 'center',
     paddingHorizontal: 40,
   },
   workoutInfo: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,
   },
   workoutName: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 4,
   },
   duration: {
     fontSize: 14,
-    color: "#999",
+    color: '#999',
   },
   section: {
     marginBottom: 24,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 12,
   },
   completeButton: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: '#4CAF50',
     borderRadius: 12,
     padding: 16,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 8,
     marginBottom: 32,
   },
   completeButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
