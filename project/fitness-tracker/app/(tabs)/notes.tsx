@@ -20,7 +20,7 @@ export default function NotesScreen() {
 
   return (
     <View style={styles.container}>
-      <Header title='Progress & Notes' onAddPress={handleAddNote} />
+      <Header title='My Goals' onAddPress={handleAddNote} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}

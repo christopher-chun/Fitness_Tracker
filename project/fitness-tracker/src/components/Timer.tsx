@@ -11,6 +11,12 @@ export default function Timer({ initialSeconds = 60, onComplete }: TimerProps) {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // reset timer when initialSeconds prop changes
+  useEffect(() => {
+    setSeconds(initialSeconds);
+    setIsRunning(false);
+  }, [initialSeconds]);
+
   // handle timer countdown
   useEffect(() => {
     if (isRunning && seconds > 0) {

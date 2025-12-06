@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   duration: {
     fontSize: 14,
-    color: '#888',
+    color: '#666',
     marginLeft: 8,
   },
   exerciseList: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   moreText: {
     fontSize: 14,
-    color: '#000000ff',
+    color: '#666',
     fontStyle: 'italic',
     marginTop: 4,
   },

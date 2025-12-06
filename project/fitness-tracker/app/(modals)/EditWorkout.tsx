@@ -79,95 +79,91 @@ export default function EditWorkout() {
   };
 
   return (
-    <ScrollView
-      style={styles.scrollView}
-      contentContainerStyle={styles.container}
-    >
-      <View style={styles.section}>
-        <Text style={styles.label}>Workout Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='Enter workout name'
-          value={workoutName}
-          onChangeText={setWorkoutName}
-        />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Duration (minutes)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='Enter duration'
-          keyboardType='numeric'
-          value={duration}
-          onChangeText={setDuration}
-        />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Add Exercise</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='Exercise Name'
-          value={exerciseName}
-          onChangeText={setExerciseName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Sets'
-          keyboardType='numeric'
-          value={sets}
-          onChangeText={setSets}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Reps'
-          keyboardType='numeric'
-          value={reps}
-          onChangeText={setReps}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Weight (lbs)'
-          keyboardType='numeric'
-          value={weights}
-          onChangeText={setWeights}
-        />
-      </View>
-      <TouchableOpacity style={styles.addButton} onPress={handleAddExercise}>
-        <Text style={styles.addButtonText}>+ Add Exercise</Text>
-      </TouchableOpacity>
-      {exercises.length > 0 && (
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.section}>
-          <Text style={styles.label}>Exercises ({exercises.length})</Text>
-          {exercises.map((exercise: any, index: number) => (
-            <ExerciseItem
-              key={index}
-              exercise={exercise}
-              onRemove={() => handleRemoveExercise(index)}
-              showRemoveButton={true}
-            />
-          ))}
+          <Text style={styles.label}>Workout Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='Enter workout name'
+            value={workoutName}
+            onChangeText={setWorkoutName}
+          />
         </View>
-      )}
-      {/* same format as CreateWorkout modal up to here */}
-      <TouchableOpacity
-        style={styles.updateButton}
-        onPress={handleUpdateWorkout}
-      >
-        <Text style={styles.updateButtonText}>Update Workout</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.deleteButton}
-        onPress={handleDeleteWorkout}
-      >
-        <Text style={styles.deleteButtonText}>Delete Workout</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cancelButton}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.cancelButtonText}>Cancel</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={styles.section}>
+          <Text style={styles.label}>Duration (minutes)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='Enter duration'
+            keyboardType='numeric'
+            value={duration}
+            onChangeText={setDuration}
+          />
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.label}>Add Exercise</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='Exercise Name'
+            value={exerciseName}
+            onChangeText={setExerciseName}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Sets'
+            keyboardType='numeric'
+            value={sets}
+            onChangeText={setSets}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Reps'
+            keyboardType='numeric'
+            value={reps}
+            onChangeText={setReps}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Weight (lbs)'
+            keyboardType='numeric'
+            value={weights}
+            onChangeText={setWeights}
+          />
+        </View>
+        <TouchableOpacity style={styles.addButton} onPress={handleAddExercise}>
+          <Text style={styles.addButtonText}>+ Add Exercise</Text>
+        </TouchableOpacity>
+        {exercises.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.label}>Exercises ({exercises.length})</Text>
+            {exercises.map((exercise: any, index: number) => (
+              <ExerciseItem
+                key={index}
+                exercise={exercise}
+                onRemove={() => handleRemoveExercise(index)}
+                showRemoveButton={true}
+              />
+            ))}
+          </View>
+        )}
+        {/* same format as CreateWorkout modal up to here */}
+        <TouchableOpacity
+          style={styles.updateButton}
+          onPress={handleUpdateWorkout}
+        >
+          <Text style={styles.updateButtonText}>Update Workout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={handleDeleteWorkout}
+        >
+          <Text style={styles.deleteButtonText}>Delete Workout</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -179,29 +175,32 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 32,
+  },
   section: {
-    marginBottom: 24,
+    marginBottom: 4,
   },
   label: {
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
     marginBottom: 8,
+    marginTop: 8,
   },
   input: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
+    marginBottom: 4,
   },
   addButton: {
     backgroundColor: '#000000ff',
     borderRadius: 8,
-    padding: 12,
+    padding: 16,
     alignItems: 'center',
-    marginTop: 12,
   },
   addButtonText: {
     color: '#fff',
@@ -209,8 +208,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   updateButton: {
-    backgroundColor: '#000000ff',
-    borderRadius: 12,
+    backgroundColor: '#4CAF50',
+    borderRadius: 8,
     padding: 16,
     alignItems: 'center',
     marginTop: 8,
@@ -222,29 +221,14 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     backgroundColor: '#E74C3C',
-    borderRadius: 12,
+    borderRadius: 8,
     padding: 16,
     alignItems: 'center',
-    marginTop: 12,
+    marginTop: 8,
   },
   deleteButtonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  cancelButton: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    marginTop: 12,
-    marginBottom: 32,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  cancelButtonText: {
-    color: '#666',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

@@ -11,7 +11,7 @@
 ---
 
 ### Prompt 3:
->"Replace me with a propt"
+>"How do I make it so when a workout is updated and I reload the session page, the timer and its initial seconds are updated accordingly"
 
 ---
 

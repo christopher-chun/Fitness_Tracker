@@ -59,6 +59,8 @@ export default function EditNote() {
           placeholder='Enter note title'
           value={noteTitle}
           onChangeText={setNoteTitle}
+          multiline
+          textAlignVertical='top'
         />
       </View>
       <View style={styles.section}>
@@ -79,12 +81,6 @@ export default function EditNote() {
       <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteNote}>
         <Text style={styles.deleteButtonText}>Delete Note</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cancelButton}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.cancelButtonText}>Cancel</Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -93,31 +89,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+    marginLeft: 16,
+    marginRight: 16,
   },
   scrollView: {
     flex: 1,
   },
   section: {
-    marginBottom: 24,
+    marginBottom: 4,
   },
   label: {
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
     marginBottom: 8,
+    marginTop: 8,
   },
   input: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
     height: 150,
+    marginBottom: 4,
   },
   updateButton: {
-    backgroundColor: '#000000ff',
-    borderRadius: 12,
+    backgroundColor: '#4CAF50',
+    borderRadius: 8,
     padding: 16,
     alignItems: 'center',
     marginTop: 8,
@@ -129,7 +127,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     backgroundColor: '#E74C3C',
-    borderRadius: 12,
+    borderRadius: 8,
     padding: 16,
     alignItems: 'center',
     marginTop: 12,
@@ -138,20 +136,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  cancelButton: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    marginTop: 12,
-    marginBottom: 32,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  cancelButtonText: {
-    color: '#666',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

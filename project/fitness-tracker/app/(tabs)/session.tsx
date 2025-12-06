@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useWorkout } from '../../src/contexts/WorkoutContext';
 import Header from '../../src/components/Header';
 import ExerciseItem from '../../src/components/ExerciseItem';
@@ -6,6 +6,8 @@ import Timer from '../../src/components/Timer';
 
 export default function SessionScreen() {
   const { currentWorkout, setCurrentWorkout } = useWorkout();
+  // determine initial seconds for timer based on workout duration
+  const timerInitialSeconds = currentWorkout && currentWorkout.duration ? currentWorkout.duration * 60 : 60;
 
   const handleEndSession = () => {
     setCurrentWorkout(null);
@@ -19,7 +21,7 @@ export default function SessionScreen() {
   if (!currentWorkout) {
     return (
       <View style={styles.container}>
-        <Header title="Today's Session" />
+        <Header title='Session' />
         <View style={styles.emptyState}>
           <Text style={styles.emptyText}>No workout selected</Text>
           <Text style={styles.emptySubtext}>
@@ -46,8 +48,8 @@ export default function SessionScreen() {
           )}
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Rest Timer</Text>
-          <Timer initialSeconds={60} onComplete={handleTimerComplete} />
+          <Text style={styles.sectionTitle}>Session Timer</Text>
+          <Timer initialSeconds={timerInitialSeconds} onComplete={handleTimerComplete} />
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Exercises</Text>
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
   emptyState: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 100,
+    justifyContent: 'flex-start',
+    paddingTop: 120,
   },
   emptyText: {
     fontSize: 20,
