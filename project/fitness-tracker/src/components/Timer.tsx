@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNotification } from '../contexts/NotficationContext';
 
 type TimerProps = {
   initialSeconds?: number;
@@ -10,26 +11,29 @@ export default function Timer({ initialSeconds = 60, onComplete }: TimerProps) {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const notificationIdRef = useRef<string | null>(null);
+  const endTimeRef = useRef<number | null>(null); // used to track end time and remaining time so the timer and notification stay in sync
+  const { scheduleTimerNotification, cancelNotification } = useNotification();
 
   // reset timer when initialSeconds prop changes
   useEffect(() => {
     setSeconds(initialSeconds);
     setIsRunning(false);
+    endTimeRef.current = null;
   }, [initialSeconds]);
 
   // handle timer countdown
   useEffect(() => {
-    if (isRunning && seconds > 0) {
+    if (isRunning && endTimeRef.current) {
       intervalRef.current = setInterval(() => {
-        // seconds countdown until 0
-        setSeconds((prev) => {
-          if (prev <= 1) {
-            handleComplete();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+        // calculate remaining time
+        const now = Date.now();
+        const remaining = Math.max(0, Math.ceil((endTimeRef.current! - now) / 1000));
+        setSeconds(remaining);
+        if (remaining <= 0) {
+          handleComplete();
+        }
+      }, 100);
     } else if (intervalRef.current) { // clear interval when paused or completed
         clearInterval(intervalRef.current);
     }
@@ -39,29 +43,46 @@ export default function Timer({ initialSeconds = 60, onComplete }: TimerProps) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning, seconds]);
+  }, [isRunning]);
 
   const handleComplete = () => {
     setIsRunning(false);
+    endTimeRef.current = null;
     if (onComplete) {
       onComplete();
     }
-    // TODO: trigger notification here when NotificationContext is added
   };
 
-  const startTimer = () => {
+  const startTimer = async () => {
     if (seconds > 0) {
       setIsRunning(true);
+      // calculate end time
+      endTimeRef.current = Date.now() + seconds * 1000;
+      // schedule notification for timer completion
+      const id = await scheduleTimerNotification(seconds);
+      notificationIdRef.current = id;
     }
   };
 
   const pauseTimer = () => {
     setIsRunning(false);
+    endTimeRef.current = null;
+    // cancel scheduled notification when paused
+    if (notificationIdRef.current) {
+      cancelNotification(notificationIdRef.current);
+      notificationIdRef.current = null;
+    }
   };
 
   const resetTimer = () => {
     setIsRunning(false);
     setSeconds(initialSeconds);
+    endTimeRef.current = null;
+    // cancel scheduled notification when reset
+    if (notificationIdRef.current) {
+      cancelNotification(notificationIdRef.current);
+      notificationIdRef.current = null;
+    }
   };
 
   const formatTime = (totalSeconds: number) => {

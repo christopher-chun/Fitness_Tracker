@@ -16,9 +16,17 @@
 ---
 
 ### Prompt 4:
->"Replace me with a propt"
+>"How would I use expo notification API so when a timer finishes, the user receives a notification"
 
 ---
+
+### Prompt 5:
+>"Are there specific Android OS options I need to include?"
+
+---
+
+### Prompt 6:
+>"I need help with a problem where the user switches the app between the background and foreground which delays the timer in the app but doesn't delay when the notification gets pushed to the user"
 .
 .
 .
