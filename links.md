@@ -59,6 +59,6 @@ Record your app running on a **real phone** and upload it to **Google Drive**.
 
 | # | Description | Link |
 |---|--------------|------|
-| 1 | **Installable Android Build** | [Paste your EAS build link here](https://expo.dev/artifacts/eas/...) |
-| 2 | **Backend URL** | [Paste your backend base URL here](https://your-app-name.onrender.com/) |
-| 3 | **Demo Video (Google Drive)** | [Paste your video link here](https://drive.google.com/...) |
+| 1 | **Installable Android Build** | [https://expo.dev/artifacts/eas/29rrML9SN46EjWzhvMXFTt.aab](https://expo.dev/artifacts/eas/...) |
+| 2 | **Backend URL** | [https://fitness-tracker-backend-9xyz.onrender.com/](https://your-app-name.onrender.com/) |
+| 3 | **Demo Video (Google Drive)** | [https://drive.google.com/file/d/1ALPk_u2SkiDA_3_ZMD1GH4gTjBaODw-u/view?usp=sharing](https://drive.google.com/...) |

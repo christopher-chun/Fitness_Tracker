@@ -21,7 +21,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.christopherchun.fitnesstracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,7 +30,15 @@
     "scheme": "fitness-tracker",
     "plugins": [
       "expo-router",
-      ["expo-notifications"]
-    ]
+      [
+        "expo-notifications"
+      ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f32362f7-660a-4d06-a55b-892e187b7467"
+      }
+    }
   }
 }
