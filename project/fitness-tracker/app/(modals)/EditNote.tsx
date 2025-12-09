@@ -11,7 +11,7 @@ export default function EditNote() {
 
   // populate fields with existing note data
   useEffect(() => {
-    const note = notes.find((n) => n.id === noteId);
+    const note = notes.find((n) => n._id === noteId);
     if (note) {
       setNoteTitle(note.title);
       setNoteContent(note.content);

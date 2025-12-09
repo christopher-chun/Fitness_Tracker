@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { useWorkout } from '../../src/contexts/WorkoutContext';
 import ExerciseItem from '../../src/components/ExerciseItem';

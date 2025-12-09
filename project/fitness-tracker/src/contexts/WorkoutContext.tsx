@@ -1,4 +1,7 @@
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
+import { BASE_URL } from '../config';
+
+const API_URL = `${BASE_URL}/api`;
 
 type Exercise = {
   name: string;
@@ -8,20 +11,28 @@ type Exercise = {
 };
 
 type Workout = {
-  id: string;
+  _id: string;
   name: string;
   duration?: number; 
   exercises: Exercise[];
   createdAt?: Date;
 };
 
+// input type for creating/updating workouts
+type WorkoutInput = {
+  name: string;
+  duration?: number;
+  exercises: Exercise[];
+};
+
+
 // defining the context type
 type WorkoutContext = {
   workouts: Workout[];
   currentWorkout: Workout | null;
-  addWorkout: (Workout: Omit<Workout, 'id' | 'createdAt'>) => void;
-  updateWorkout: (id: string, workout: Omit<Workout, 'id' | 'createdAt'>) => void;
-  deleteWorkout: (id: string) => void;
+  addWorkout: (workout: WorkoutInput) => Promise<void>;
+  updateWorkout: (id: string, workout: WorkoutInput) => Promise<void>;
+  deleteWorkout: (id: string) => Promise<void>;
   setCurrentWorkout: (workout: Workout | null) => void;
 };
 
@@ -32,28 +43,63 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [currentWorkout, setCurrentWorkout] = useState<Workout | null>(null);
 
+  // load workouts on mount
+  useEffect(() => {
+    loadWorkouts();
+  }, []);
+
+  const loadWorkouts = async () => {
+    try {
+      const response = await fetch(`${API_URL}/workouts`);
+      const data: Workout[] = await response.json();
+      setWorkouts(data);
+    } catch (error) {
+      console.error('Failed to load workouts:', error);
+    }
+  };
+
   // function to add a new workout
-  const addWorkout = (workout: Omit<Workout, 'id' | 'createdAt'>) => {
-    const newWorkout: Workout = {
-        ...workout,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-    };
-    setWorkouts([newWorkout, ...workouts]);
+  const addWorkout = async (workout: WorkoutInput) => {
+    try {
+      const response = await fetch(`${API_URL}/workouts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(workout),
+      });
+      const newWorkout: Workout = await response.json();
+      setWorkouts([newWorkout, ...workouts]);
+    } catch (error) {
+      console.error('Failed to add workout:', error);
+    }
   }
 
   // function to update an existing workout
-  const updateWorkout = (id: string, updatedWorkout: Omit<Workout, 'id' | 'createdAt'>) => {
-    setWorkouts(workouts.map((workout) => 
-      workout.id === id ? { ...updatedWorkout, id, createdAt: workout.createdAt } : workout
-    ));
+  const updateWorkout = async (id: string, workout: WorkoutInput) => {
+    try {
+      const response = await fetch(`${API_URL}/workouts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(workout),
+      });
+      const updatedWorkout: Workout = await response.json();
+      setWorkouts(workouts.map((workout) => (workout._id === id ? updatedWorkout : workout)));
+    } catch (error) {
+      console.error('Failed to update workout:', error);
+    }
   }
 
   // function to delete a workout
-  const deleteWorkout = (id: string) => {
-    setWorkouts(workouts.filter((workout) => workout.id !== id));
-    if (currentWorkout?.id === id) {
-      setCurrentWorkout(null);
+  const deleteWorkout = async (id: string) => {
+    try {
+      await fetch(`${API_URL}/workouts/${id}`, {
+        method: 'DELETE',
+      });
+      setWorkouts(workouts.filter((workout) => workout._id !== id));
+      if (currentWorkout?._id === id) {
+        setCurrentWorkout(null);
+      }
+    } catch (error) {
+      console.error('Failed to delete workout:', error);
     }
   }
 

@@ -17,7 +17,7 @@ export default function EditWorkout() {
   const [weights, setWeights] = useState('');
 
   useEffect(() => {
-    const workout = workouts.find((w) => w.id === workoutId);
+    const workout = workouts.find((w) => w._id === workoutId);
     if (workout) {
       setWorkoutName(workout.name);
       setDuration(workout.duration ? workout.duration.toString() : '');

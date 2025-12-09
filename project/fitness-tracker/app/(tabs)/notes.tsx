@@ -14,7 +14,7 @@ export default function NotesScreen() {
   const handleNotePress = (note: any) => {
     router.push({
       pathname: '/(modals)/EditNote',
-      params: { noteId: note.id },
+      params: { noteId: note._id },
     });
   };
 
@@ -37,7 +37,7 @@ export default function NotesScreen() {
             <Text style={styles.sectionTitle}>All Notes</Text>
             {notes.map((note: any) => (
               <NoteCard
-                key={note.id}
+                key={note._id}
                 note={note}
                 onPress={() => handleNotePress(note)}
               />

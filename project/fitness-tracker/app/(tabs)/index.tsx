@@ -15,7 +15,7 @@ export default function WorkoutsScreen() {
   const handleWorkoutLongPress = (workout: any) => {
     router.push({
       pathname: '/(modals)/EditWorkout',
-      params: { workoutId: workout.id },
+      params: { workoutId: workout._id },
     });
   };
 
@@ -40,7 +40,7 @@ export default function WorkoutsScreen() {
         ) : (
           workouts.map((workout: any) => (
             <WorkoutCard
-              key={workout.id}
+              key={workout._id}
               workout={workout}
               onPress={() => handleWorkoutPress(workout)}
               onLongPress={() => handleWorkoutLongPress(workout)}
