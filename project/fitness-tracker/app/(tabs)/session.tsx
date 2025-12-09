@@ -15,7 +15,7 @@ export default function SessionScreen() {
   };
 
   const handleTimerComplete = () => {
-    Alert.alert('Rest Completed');
+    Alert.alert('Timer Complete!');
   };
 
   if (!currentWorkout) {
